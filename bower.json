@@ -1,0 +1,21 @@
+{
+  "name": "jquery-animation",
+  "version": "1.0.0",
+  "homepage": "https://github.com/yivo/jquery-animation",
+  "authors": [
+    "Yaroslav Konoplov <yaroslav@inbox.com>"
+  ],
+  "description": "animationEnd event + $.fn.emulateAnimationEnd",
+  "main": "build/jquery-animation.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "coffeespec",
+    "source",
+    "spec"
+  ]
+}
