@@ -4,14 +4,14 @@
     root = typeof self === 'object' && self !== null && self.self === self ? self : typeof global === 'object' && global !== null && global.global === global ? global : void 0;
     if (typeof define === 'function' && typeof define.amd === 'object' && define.amd !== null) {
       define(['jquery', 'exports'], function($) {
-        return factory(root, document, setTimeout, $);
+        return factory(root, document, $);
       });
     } else if (typeof module === 'object' && module !== null && typeof module.exports === 'object' && module.exports !== null) {
-      factory(root, document, setTimeout, require('jquery'));
+      factory(root, document, require('jquery'));
     } else {
-      factory(root, document, setTimeout, root.$);
+      factory(root, document, root.$);
     }
-  })(function(__root__, document, setTimeout, $) {
+  })(function(__root__, document, $) {
     var animationEnd;
     animationEnd = function() {
       var animEndEventNames, el, name;
@@ -37,7 +37,7 @@
       called = false;
       $el = this;
       $el.one('animationEnd', function() {
-        return called = true;
+        called = true;
       });
       callback = function() {
         if (!called) {
@@ -48,19 +48,20 @@
       return this;
     };
     $(function() {
+      var handler;
       $.support.animation = animationEnd();
-      if (!$.support.animation) {
-        return;
-      }
-      return $.event.special.animationEnd = {
-        bindType: $.support.animation.end,
-        delegateType: $.support.animation.end,
-        handle: function(e) {
-          if ($(e.target).is(this)) {
-            return e.handleObj.handler.apply(this, arguments);
+      if ($.support.animation) {
+        handler = function(e) {
+          if (e.target === this) {
+            e.handleObj.handler.apply(this, arguments);
           }
-        }
-      };
+        };
+        $.event.special.animationEnd = {
+          bindType: $.support.animation.end,
+          delegateType: $.support.animation.end,
+          handle: handler
+        };
+      }
     });
   });
 

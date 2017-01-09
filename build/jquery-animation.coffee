@@ -11,21 +11,21 @@
   # AMD
   if typeof define is 'function' and typeof define.amd is 'object' and define.amd isnt null
     define ['jquery', 'exports'], ($) ->
-      factory(root, document, setTimeout, $)
+      factory(root, document, $)
 
   # CommonJS
   else if typeof module is 'object' and module isnt null and
           typeof module.exports is 'object' and module.exports isnt null
-    factory(root, document, setTimeout, require('jquery'))
+    factory(root, document, require('jquery'))
 
   # Browser and the rest
   else
-    factory(root, document, setTimeout, root.$)
+    factory(root, document, root.$)
 
   # No return value
   return
 
-)((__root__, document, setTimeout, $) ->
+)((__root__, document, $) ->
   animationEnd = ->
     el = document.createElement('div')
   
@@ -42,12 +42,15 @@
     false
   
   $.fn.emulateAnimationEnd = (duration) ->
-    called = no
+    called = false
     $el    = this
-    $el.one 'animationEnd', -> called = yes
+    $el.one 'animationEnd', ->
+      called = true
+      return
   
     callback = ->
-      $el.trigger($.support.animation.end) unless called
+      if not called
+        $el.trigger($.support.animation.end)
       return
   
     setTimeout(callback, duration)
@@ -56,13 +59,17 @@
   $ ->
     $.support.animation = animationEnd()
   
-    return unless $.support.animation
-  
-    $.event.special.animationEnd =
-      bindType:     $.support.animation.end,
-      delegateType: $.support.animation.end,
-      handle:       (e) -> e.handleObj.handler.apply(this, arguments) if $(e.target).is(this)
-  
+    if $.support.animation
+      handler = (e) ->
+        if e.target is this
+          e.handleObj.handler.apply(this, arguments)
+        return
+      
+      $.event.special.animationEnd =
+        bindType:     $.support.animation.end
+        delegateType: $.support.animation.end
+        handle:       handler
+    return
   # No global variable export
   return
 )

@@ -1,3 +1,3 @@
 # jquery-animation
 ## Installation
-`bower install jquery-animation`
+`bower install jquery-animation-support`
