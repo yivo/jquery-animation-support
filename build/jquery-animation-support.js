@@ -1,6 +1,6 @@
 
 /*!
- * jquery-animation 1.0.2 | https://github.com/yivo/jquery-animation | MIT License
+ * jquery-animation-support 1.0.3 | https://github.com/yivo/jquery-animation-support | MIT License
  */
 
 (function() {
@@ -9,14 +9,14 @@
     __root__ = typeof self === 'object' && self !== null && self.self === self ? self : typeof global === 'object' && global !== null && global.global === global ? global : Function('return this')();
     if (typeof define === 'function' && typeof define.amd === 'object' && define.amd !== null) {
       define(['jquery'], function($) {
-        return factory(__root__, document, $);
+        return factory(__root__, document, setTimeout, $);
       });
     } else if (typeof module === 'object' && module !== null && typeof module.exports === 'object' && module.exports !== null) {
-      factory(__root__, document, require('jquery'));
+      factory(__root__, document, setTimeout, require('jquery'));
     } else {
-      factory(__root__, document, $);
+      factory(__root__, document, setTimeout, $);
     }
-  })(function(__root__, document, $) {
+  })(function(__root__, document, setTimeout, $) {
     var animationEnd;
     animationEnd = function() {
       var animEndEventNames, el, name;

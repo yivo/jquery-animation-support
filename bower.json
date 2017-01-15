@@ -1,17 +1,20 @@
 {
-  "name": "jquery-animation",
-  "description": "animationEnd event + $.fn.emulateAnimationEnv",
-  "main": "build/jquery-animation.js",
+  "name": "jquery-animation-support",
+  "description": "animationEnd event + $.fn.emulateAnimationEnd",
+  "main": "build/jquery-animation-support.js",
   "authors": [
     "Yaroslav Konoplov <eahome00@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/yivo/jquery-animation",
+  "homepage": "https://github.com/yivo/jquery-animation-support",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": ">=1.9.1"
+  }
 }

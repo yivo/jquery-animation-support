@@ -1,21 +1,24 @@
 {
-  "name": "jquery-animation",
-  "version": "1.0.2",
+  "name": "jquery-animation-support",
+  "version": "1.0.3",
   "description": "animationEnd event + $.fn.emulateAnimationEnd",
-  "main": "build/jquery-animation.js",
+  "main": "build/jquery-animation-support.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yivo/jquery-animation.git"
+    "url": "git+https://github.com/yivo/jquery-animation-support.git"
   },
   "author": "Yaroslav Konoplov <eahome00@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yivo/jquery-animation/issues"
+    "url": "https://github.com/yivo/jquery-animation-support/issues"
   },
-  "homepage": "https://github.com/yivo/jquery-animation#readme",
+  "homepage": "https://github.com/yivo/jquery-animation-support#readme",
+  "dependencies": {
+    "jquery": ">=1.9.1"
+  },
   "devDependencies": {
     "coffee-script": "^1.12.2",
     "gulp": "^3.9.1",

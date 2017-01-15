@@ -8,16 +8,15 @@ fs      = require 'fs'
 gulp.task 'default', ['build', 'watch'], ->
 
 gulp.task 'build', ->
-  dependencies = [{global: 'document', native:  true},
-                  {global: '$',        require: 'jquery'}]
-  header = fs.readFileSync('source/__license__.coffee')
-  gulp.src('source/jquery-animation.coffee')
+  gulp.src('source/jquery-animation-support.coffee')
     .pipe plumber()
-    .pipe umd({dependencies, header})
-    .pipe concat('jquery-animation.coffee')
+    .pipe umd do ->
+            dependencies: [{global: 'document',   native:  true}
+                           {global: 'setTimeout', native:  true}
+                           {global: '$',          require: 'jquery'}]
+            header: fs.readFileSync('source/__license__.coffee')
     .pipe gulp.dest('build')
     .pipe coffee()
-    .pipe concat('jquery-animation.js')
     .pipe gulp.dest('build')
 
 gulp.task 'watch', ->

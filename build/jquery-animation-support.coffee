@@ -1,5 +1,5 @@
 ###!
-# jquery-animation 1.0.2 | https://github.com/yivo/jquery-animation | MIT License
+# jquery-animation-support 1.0.3 | https://github.com/yivo/jquery-animation-support | MIT License
 ###
 
 ((factory) ->
@@ -19,20 +19,20 @@
   # Asynchronous Module Definition (AMD)
   if typeof define is 'function' and typeof define.amd is 'object' and define.amd isnt null
     define ['jquery'], ($) ->
-      factory(__root__, document, $)
+      factory(__root__, document, setTimeout, $)
 
   # Server-side JavaScript Runtime compatible with CommonJS Module Spec
   else if typeof module is 'object' and module isnt null and typeof module.exports is 'object' and module.exports isnt null
-    factory(__root__, document, require('jquery'))
+    factory(__root__, document, setTimeout, require('jquery'))
 
   # Browser, Web Worker and the rest
   else
-    factory(__root__, document, $)
+    factory(__root__, document, setTimeout, $)
 
   # No return value
   return
 
-)((__root__, document, $) ->
+)((__root__, document, setTimeout, $) ->
   animationEnd = ->
     el = document.createElement('div')
   
